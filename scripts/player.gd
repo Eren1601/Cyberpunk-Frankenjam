@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 @export var speed: float = 200.0
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@export var Pilz: PackedScene = preload("res://scenes/Pilz.tscn")
+
+
 func _ready() -> void:
 	anim.play("idle")
 
@@ -25,7 +28,15 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = Vector2.ZERO
 		move_and_slide()
-
 		# Animation wechseln zu "idle"
 		if anim.animation != "idle":
 			anim.play("idle")
+
+	# Pilz platzieren
+	if Input.is_action_just_pressed("plant_mushroom"):
+		_place_mushroom()
+
+func _place_mushroom():
+	var mushroom = Pilz.instantiate()
+	mushroom.position = position
+	get_tree().current_scene.add_child(mushroom)

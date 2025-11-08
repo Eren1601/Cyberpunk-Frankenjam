@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://c62bxriyf3xm7"]
+
+[ext_resource type="Script" uid="uid://gc7ghgg03d86" path="res://scenes/pilz.gd" id="1_n7kbj"]
+[ext_resource type="Texture2D" uid="uid://bhusq3dqpom03" path="res://aseprite/Animation Pilz.png" id="1_wo5an"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wo5an"]
+atlas = ExtResource("1_wo5an")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7kbj"]
+atlas = ExtResource("1_wo5an")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rutrc"]
+atlas = ExtResource("1_wo5an")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xy864"]
+atlas = ExtResource("1_wo5an")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gxit"]
+atlas = ExtResource("1_wo5an")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gnxu8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wo5an")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7kbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rutrc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xy864")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gxit")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_n7kbj")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gnxu8")
+frame = 2
+frame_progress = 0.7692803
