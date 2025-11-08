@@ -20,12 +20,16 @@ noise = SubResource("FastNoiseLite_nrtoj")
 color_ramp = SubResource("Gradient_7c4bj")
 
 [node name="Node2D" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Forest Layer" type="Node2D" parent="."]
 
 [node name="Background" type="Sprite2D" parent="Forest Layer"]
 texture = SubResource("NoiseTexture2D_i4b1j")
 metadata/_edit_lock_ = true
+
+[node name="Player" parent="Forest Layer/Background" instance=ExtResource("2_0uv0p")]
+position = Vector2(-303, -136)
 
 [node name="Trees" type="Node2D" parent="Forest Layer"]
 
@@ -279,9 +283,6 @@ _node_id = 29
 position = Vector2(-429, 283)
 _node_id = 30
 
-[node name="Player" parent="Forest Layer" instance=ExtResource("2_0uv0p")]
-position = Vector2(-303, -136)
-
 [node name="RootGraph" type="Node" parent="."]
 script = ExtResource("3_b3faq")
 
@@ -298,3 +299,12 @@ graph_path = NodePath("../RootGraph")
 
 [node name="GameState" type="Node" parent="."]
 script = ExtResource("6_h1bdy")
+
+[node name="Collision" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Collision"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/StaticBody2D"]
+polygon = PackedVector2Array(-479, -359, 481, -357, 479, 359, -485, 357, -480, -339, -533, -118, -559, 328, -474, 468, 162, 465, 629, 460, 591, -301, 434, -431, -26, -469, -553, -412, -481, -340)

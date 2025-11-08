@@ -245,16 +245,19 @@ height = 16.0
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
+y_sort_enabled = true
 collision_mask = 2
 script = ExtResource("1_p0vlq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(2, 0)
 sprite_frames = SubResource("SpriteFrames_fq1a3")
 animation = &"idle"
 frame_progress = 0.42452335
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
 position = Vector2(0, 7)
 shape = SubResource("CapsuleShape2D_3li8b")
 

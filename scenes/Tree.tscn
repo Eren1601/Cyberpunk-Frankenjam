@@ -9,14 +9,16 @@ height = 10.0
 
 [node name="Tree" type="Node2D"]
 z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_2cic4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-24, -65)
 texture = ExtResource("2_omb14")
-centered = false
+offset = Vector2(1, -20)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+y_sort_enabled = true
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
