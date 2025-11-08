@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c62bxriyf3xm7"]
+[gd_scene load_steps=10 format=3 uid="uid://c62bxriyf3xm7"]
 
 [ext_resource type="Script" uid="uid://gc7ghgg03d86" path="res://scenes/pilz.gd" id="1_n7kbj"]
 [ext_resource type="Texture2D" uid="uid://bhusq3dqpom03" path="res://aseprite/Animation Pilz.png" id="1_wo5an"]
@@ -46,6 +46,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7kbj"]
+radius = 7.0
+height = 14.0
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_n7kbj")
 
@@ -53,5 +57,7 @@ script = ExtResource("1_n7kbj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gnxu8")
-frame = 2
-frame_progress = 0.7692803
+frame_progress = 0.82348067
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_n7kbj")
