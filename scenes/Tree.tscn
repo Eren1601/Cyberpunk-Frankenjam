@@ -1,25 +1,23 @@
 [gd_scene load_steps=4 format=3 uid="uid://c5k7efi2kjktv"]
 
 [ext_resource type="Script" uid="uid://1dmmwt1mswrt" path="res://scripts/tree.gd" id="1_2cic4"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2cic4"]
-size = Vector2(30, 80)
+[ext_resource type="Texture2D" uid="uid://dpjwsjkxol4xa" path="res://aseprite/Sprites/Polar_Baum.png" id="2_omb14"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_omb14"]
-radius = 15.0
-height = 34.0
+radius = 3.5
+height = 18.0
 
 [node name="Tree" type="Node2D"]
 script = ExtResource("1_2cic4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-15, -76)
-texture = SubResource("PlaceholderTexture2D_2cic4")
+position = Vector2(-24, -65)
+texture = ExtResource("2_omb14")
 centered = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, -8)
+position = Vector2(0.5, -9)
 shape = SubResource("CapsuleShape2D_omb14")
