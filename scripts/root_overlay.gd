@@ -1,1 +1,86 @@
-extends Node
+# scripts/RootOverlay.gd
+# ----------------------------------------------------------
+# Draws the underground root network (graph) as an overlay.
+# It scales and transforms world positions (tree nodes) into
+# screen coordinates, and draws curved Bezier-like connections.
+# ----------------------------------------------------------
+
+extends Control
+
+@export var graph_path: NodePath
+var graph: Node = null
+
+# Cached world bounds for coordinate transformation
+var world_rect: Rect2 = Rect2(Vector2.ZERO, Vector2.ONE)
+
+func _ready() -> void:
+	graph = get_node_or_null(graph_path)
+	if graph:
+		graph.connect("graph_changed", Callable(self, "_on_graph_changed"))
+		_on_graph_changed()
+
+# Called whenever the graph changes (e.g. new nodes, edges, chopped trees)
+func _on_graph_changed() -> void:
+	if graph and graph.has_method("get_world_bounds"):
+		world_rect = graph.call("get_world_bounds")
+	_draw()
+
+# Converts world position to overlay position
+func _world_to_ui(p: Vector2) -> Vector2:
+	if world_rect.size.x == 0 or world_rect.size.y == 0:
+		return Vector2.ZERO
+	var rect_size := get_size()
+	var scale := Vector2(rect_size.x / world_rect.size.x, rect_size.y / world_rect.size.y)
+	return (p - world_rect.position) * scale
+
+# ----------------------------------------------------------
+# DRAWING
+# ----------------------------------------------------------
+
+func _draw() -> void:
+	if graph == null:
+		return
+
+	# Draw edges (curvy Bezier-like lines)
+	for e in graph.edges:
+		var a = graph.nodes.get(e.a_id)
+		var b = graph.nodes.get(e.b_id)
+		if a == null or b == null:
+			continue
+		if !a.enabled or !b.enabled:
+			continue
+		var pa = _world_to_ui(a.pos)
+		var pb = _world_to_ui(b.pos)
+		_draw_root_curve(pa, pb)
+
+	# Draw nodes
+	for n in graph.nodes.values():
+		var col: Color = Color(0.82, 0.7, 0.45) if n.enabled else Color(0.3, 0.3, 0.3)
+		draw_circle(_world_to_ui(n.pos), 5.0, col)
+
+# Draw a single curved root between two points
+func _draw_root_curve(a: Vector2, b: Vector2) -> void:
+	var dir: Vector2 = (b - a)
+	var n: Vector2 = Vector2(-dir.y, dir.x).normalized()
+	var mid: Vector2 = (a + b) * 0.5
+	var length: float = max(dir.length(), 1.0)
+	var wobble: float = 0.15 * length
+	var t: float = float(Time.get_ticks_msec()) * 0.001
+	var offset: Vector2 = n * (sin(t + a.x * 0.01 + b.y * 0.01) * wobble)
+
+	var p0: Vector2 = a
+	var p1: Vector2 = mid + offset
+	var p2: Vector2 = b
+
+	var last: Vector2 = p0
+	var steps: int = int(clamp(length / 10.0, 8.0, 64.0))
+	for i in range(1, steps + 1):
+		var tt: float = float(i) / steps
+		var q: Vector2 = _bezier2(p0, p1, p2, tt)
+		draw_line(last, q, Color(0.45, 0.25, 0.10), 3.0, true)
+		last = q
+
+# Quadratic Bezier interpolation helper
+func _bezier2(p0: Vector2, p1: Vector2, p2: Vector2, t: float) -> Vector2:
+	var u: float = 1.0 - t
+	return u * u * p0 + 2.0 * u * t * p1 + t * t * p2
