@@ -139,7 +139,7 @@ _node_id = 48
 
 [node name="Tree54" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 z_index = 2
-position = Vector2(-6, 46.00001)
+position = Vector2(7.6293945e-06, 23.000015)
 scale = Vector2(3.5, 3.5)
 _node_id = 54
 
@@ -172,7 +172,7 @@ position = Vector2(-145, -205)
 _node_id = 10
 
 [node name="Tree11" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
-position = Vector2(-79, -178)
+position = Vector2(-29, -125)
 _node_id = 11
 
 [node name="Tree12" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
@@ -285,17 +285,11 @@ _node_id = 30
 
 [node name="RootGraph" type="Node" parent="."]
 script = ExtResource("3_b3faq")
+min_connect_radius = 150.0
+max_connect_radius = 175.0
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("4_ygioq")
-
-[node name="RootOverlay" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("5_pdh0q")
-graph_path = NodePath("../RootGraph")
 
 [node name="GameState" type="Node" parent="."]
 script = ExtResource("6_h1bdy")
@@ -308,3 +302,21 @@ collision_mask = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/StaticBody2D"]
 polygon = PackedVector2Array(-479, -359, 481, -357, 479, 359, -485, 357, -480, -339, -533, -118, -559, 328, -474, 468, 162, 465, 629, 460, 591, -301, 434, -431, -26, -469, -553, -412, -481, -340)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RootOverlay" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_left = 0.05
+anchor_top = 0.081
+anchor_right = 0.96000004
+anchor_bottom = 0.88600004
+offset_left = -6.0
+offset_top = -6.4400005
+offset_right = 2.7999878
+offset_bottom = 3.3599854
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_pdh0q")
+graph_path = NodePath("../RootGraph")
+metadata/_edit_use_anchors_ = true

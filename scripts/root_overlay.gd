@@ -15,15 +15,23 @@ var world_rect: Rect2 = Rect2(Vector2.ZERO, Vector2.ONE)
 
 func _ready() -> void:
 	graph = get_node_or_null(graph_path)
+	if graph == null:
+		graph = get_tree().get_root().find_child("RootGraph", true, false)
+
 	if graph:
 		graph.connect("graph_changed", Callable(self, "_on_graph_changed"))
 		_on_graph_changed()
+	else:
+		printerr("RootOverlay: RootGraph not found. Set graph_path or name the node 'RootGraph'.")
+
+	# Optional: start visible for debugging if you haven't set the Input Map yet
+	visible = true
 
 # Called whenever the graph changes (e.g. new nodes, edges, chopped trees)
 func _on_graph_changed() -> void:
 	if graph and graph.has_method("get_world_bounds"):
 		world_rect = graph.call("get_world_bounds")
-	_draw()
+	queue_redraw()
 
 # Converts world position to overlay position
 func _world_to_ui(p: Vector2) -> Vector2:
@@ -36,6 +44,13 @@ func _world_to_ui(p: Vector2) -> Vector2:
 # ----------------------------------------------------------
 # DRAWING
 # ----------------------------------------------------------
+func _process(delta: float) -> void:
+	# Toggle logic; comment out if you want it always on
+	if InputMap.has_action("show_map"):
+		visible = Input.is_action_pressed("show_map")
+	# Animate curves (wobble): redraw when visible
+	if visible:
+		queue_redraw()
 
 func _draw() -> void:
 	if graph == null:
