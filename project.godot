@@ -11,8 +11,15 @@ config_version=5
 [application]
 
 config/name="Cyberpunk"
+run/main_scene="uid://46efp3lmwcbh"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=320
+window/size/viewport_height=240
+window/stretch/mode="viewport"
 
 [input]
 
@@ -56,3 +63,7 @@ use_watering_can={
 
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Trees"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
