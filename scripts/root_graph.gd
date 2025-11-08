@@ -4,6 +4,10 @@
 class_name RootGraph
 extends Node
 
+@export_group("Automated Connection Parameters")
+@export var min_connect_radius := 200.0
+@export var max_connect_radius := 300.0
+
 class RootNode:
 	var id: int
 	var pos: Vector2
@@ -136,13 +140,15 @@ func _ready() -> void:
 	if trees_root:
 		var id_counter := 1
 		for t in trees_root.get_children():
-			if t.has_method("get_node_id"):
-				var tid: int = 0
-				tid = int(t.call("get_node_id"))
+			if "node_id" in t:
+				var tid: int = int(t.node_id)
 				add_node(tid, (t as Node2D).global_position)
 				id_counter = max(id_counter, tid + 1)
-		auto_connect_by_radius(100.0, 120.0, 12345, -1, true)
-
+			else:
+				printerr("Tree has no node_ID")
+		auto_connect_by_radius(min_connect_radius, max_connect_radius, 12345, -1, true)
+	else:
+		printerr("no Trees Node found")
 func _has_edge(a_id: int, b_id: int) -> bool:
 	for e in edges:
 		if (e.a_id == a_id and e.b_id == b_id) or (e.a_id == b_id and e.b_id == a_id):
@@ -161,6 +167,7 @@ func auto_connect_by_radius(min_r: float, max_r: float, seed: int = 12345, max_d
 	# Then connect all node pairs whose distance <= min(r_i, r_j),
 	# respecting optional max_degree per node. Edge cost = distance or 1.0.
 	if nodes.size() < 2:
+		printerr("less than 2 Nodes")
 		return
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
@@ -188,6 +195,7 @@ func auto_connect_by_radius(min_r: float, max_r: float, seed: int = 12345, max_d
 						continue
 					var cost: float = (d if use_distance_cost else 1.0)
 					add_edge(a_id, b_id, cost)
+					print_debug("a_id: ", a_id , " b_id: ", b_id, " cost: ", cost)
 
 	# Emit once at end to avoid repeated redraws if you prefer. Here add_edge already emits.
 	emit_signal("graph_changed")
