@@ -13,7 +13,7 @@ func _on_play_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/World.tscn")
 
 func _on_suprised_pressed() -> void:
-	OS.shell_open("https://www.youtube.com/watch?v=xvFZjo5PgG0")
+	get_tree().change_scene_to_file("res://scenes/job.tscn")
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
