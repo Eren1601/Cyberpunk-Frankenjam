@@ -251,7 +251,7 @@ script = ExtResource("1_p0vlq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
-position = Vector2(2, 0)
+position = Vector2(2.5, 0)
 sprite_frames = SubResource("SpriteFrames_fq1a3")
 animation = &"idle"
 frame_progress = 0.42452335

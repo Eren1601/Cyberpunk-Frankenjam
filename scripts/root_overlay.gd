@@ -6,9 +6,17 @@
 # ----------------------------------------------------------
 
 extends Control
+@export var canvas: CanvasLayer
 
 @export var graph_path: NodePath
 var graph: Node = null
+
+var color_node_spawner_active: Color = Color(0.802, 0.192, 0.376, 1.0)
+var color_node_spawner_inactive: Color = Color(0.361, 0.016, 0.045, 1.0)
+var color_node_active: Color = Color(0.15, 0.558, 0.94, 1.0)
+var color_node_disabled: Color = Color(0.12, 0.267, 0.405, 1.0)
+var color_edges_active: Color = Color(0.53, 0.696, 0.89, 1.0)
+var color_edges_disabled: Color = Color(0.25, 0.367, 0.5, 1.0)
 
 # Cached world bounds for coordinate transformation
 var world_rect: Rect2 = Rect2(Vector2.ZERO, Vector2.ONE)
@@ -47,7 +55,7 @@ func _world_to_ui(p: Vector2) -> Vector2:
 func _process(delta: float) -> void:
 	# Toggle logic; comment out if you want it always on
 	if InputMap.has_action("show_map"):
-		visible = Input.is_action_pressed("show_map")
+		canvas.visible = Input.is_action_pressed("show_map")
 	# Animate curves (wobble): redraw when visible
 	if visible:
 		queue_redraw()
@@ -70,8 +78,15 @@ func _draw() -> void:
 
 	# Draw nodes
 	for n in graph.nodes.values():
-		var col: Color = Color(0.82, 0.7, 0.45) if n.enabled else Color(0.3, 0.3, 0.3)
-		draw_circle(_world_to_ui(n.pos), 5.0, col)
+		var col: Color 
+		if n.is_spawner:
+			col = color_node_spawner_active if n.enabled else color_node_spawner_inactive
+		else:
+			col = color_node_active if n.enabled else color_node_disabled
+		if n.is_big_tree:
+			draw_circle(_world_to_ui(n.pos), 10.0, col) 
+		else:
+			draw_circle(_world_to_ui(n.pos), 5.0, col) 
 
 # Draw a single curved root between two points
 func _draw_root_curve(a: Vector2, b: Vector2) -> void:
@@ -79,7 +94,7 @@ func _draw_root_curve(a: Vector2, b: Vector2) -> void:
 	var n: Vector2 = Vector2(-dir.y, dir.x).normalized()
 	var mid: Vector2 = (a + b) * 0.5
 	var length: float = max(dir.length(), 1.0)
-	var wobble: float = 0.15 * length
+	var wobble: float = 0.025 * length
 	var t: float = float(Time.get_ticks_msec()) * 0.001
 	var offset: Vector2 = n * (sin(t + a.x * 0.01 + b.y * 0.01) * wobble)
 
@@ -92,7 +107,7 @@ func _draw_root_curve(a: Vector2, b: Vector2) -> void:
 	for i in range(1, steps + 1):
 		var tt: float = float(i) / steps
 		var q: Vector2 = _bezier2(p0, p1, p2, tt)
-		draw_line(last, q, Color(0.45, 0.25, 0.10), 3.0, true)
+		draw_line(last, q, color_edges_active, 1.5, false)
 		last = q
 
 # Quadratic Bezier interpolation helper

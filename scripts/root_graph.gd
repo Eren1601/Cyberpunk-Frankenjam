@@ -8,10 +8,13 @@ extends Node
 @export var min_connect_radius := 200.0
 @export var max_connect_radius := 300.0
 
+
 class RootNode:
 	var id: int
 	var pos: Vector2
 	var enabled: bool = true
+	var is_spawner: bool = true
+	var is_big_tree: bool = false
 
 class RootEdge:
 	var a_id: int
@@ -25,10 +28,12 @@ var adj: Dictionary = {}              # id -> Array[[neighbor_id, cost]]
 signal graph_changed
 signal node_toggled(id: int, enabled: bool)
 
-func add_node(id: int, pos: Vector2) -> void:
+func add_node(id: int, pos: Vector2, is_spawner: bool = false, is_big_tree: bool = false) -> void:
 	var n := RootNode.new()
 	n.id = id
 	n.pos = pos
+	n.is_spawner = is_spawner
+	n.is_big_tree = is_big_tree
 	nodes[id] = n
 
 func add_edge(a_id: int, b_id: int, cost := 1.0) -> void:
@@ -58,6 +63,9 @@ func get_world_bounds() -> Rect2:
 	var x_values: Array[float] = []
 	var y_values: Array[float] = []
 	for n in nodes.values():
+		#if n.is_spawner:
+			#print("skipped spawner in bounds calculation")
+			#continue
 		x_values.append(n.pos.x)
 		y_values.append(n.pos.y)
 	x_values.sort()
@@ -138,17 +146,16 @@ func _ready() -> void:
 	# 2) Define edges manually here for now (edit this block per level)
 	var trees_root := get_tree().get_root().find_child("Trees", true, false)
 	if trees_root:
-		var id_counter := 1
 		for t in trees_root.get_children():
 			if "node_id" in t:
 				var tid: int = int(t.node_id)
-				add_node(tid, (t as Node2D).global_position)
-				id_counter = max(id_counter, tid + 1)
+				add_node(tid, (t as Node2D).global_position, t.is_spawner, t.is_big_tree)
 			else:
 				printerr("Tree has no node_ID")
 		auto_connect_by_radius(min_connect_radius, max_connect_radius, 12345, -1, true)
 	else:
 		printerr("no Trees Node found")
+
 func _has_edge(a_id: int, b_id: int) -> bool:
 	for e in edges:
 		if (e.a_id == a_id and e.b_id == b_id) or (e.a_id == b_id and e.b_id == a_id):
@@ -161,6 +168,13 @@ func _degree_of(nid: int) -> int:
 		if e.a_id == nid or e.b_id == nid:
 			d += 1
 	return d
+
+func get_spawn_nodes() -> Array[int]:
+	var out: Array[int] = []
+	for id in nodes.keys():
+		if nodes[id].enabled and nodes[id].is_spawner:
+			out.append(id)
+	return out
 
 func auto_connect_by_radius(min_r: float, max_r: float, seed: int = 12345, max_degree: int = -1, use_distance_cost: bool = true) -> void:
 	# For each node, pick a random connection radius in [min_r, max_r].
