@@ -4,8 +4,20 @@
 # It scales and transforms world positions (tree nodes) into
 # screen coordinates, and draws curved Bezier-like connections.
 # ----------------------------------------------------------
-
 extends Control
+
+class MinimapEnemyToken:
+	var path: Array[int] = []                    # Node-ID-Pfad
+	var seg: int = 0                             # aktueller Pfad-Index (zwischen path[seg] und path[seg+1])
+	var poly: PackedVector2Array = PackedVector2Array()  # aktuelle Kanten-Polyline (world-space)
+	var poly_i: int = 0                          # Index innerhalb der Polyline
+	var pos_world: Vector2 = Vector2.ZERO        # aktuelle Weltposition
+	var speed_ui: float = 20.0                   # Bewegungsgeschwindigkeit in UI-Pixeln/s
+	var born_t: float = 0.0                      # für Blinken
+	var color: Color = Color(0.9, 0.15, 0.15)
+
+var tokens: Array[MinimapEnemyToken] = []
+
 @export var canvas: CanvasLayer
 
 @export var graph_path: NodePath
@@ -34,6 +46,12 @@ func _ready() -> void:
 
 	# Optional: start visible for debugging if you haven't set the Input Map yet
 	visible = true
+	
+	# Alle EnemySpawner finden und ihr Signal anbinden:
+	var spawners := get_tree().get_nodes_in_group("enemy_spawners")
+	for s in spawners:
+		s.connect("minimap_spawn_requested", Callable(self, "_on_minimap_spawn_requested"))
+
 
 # Called whenever the graph changes (e.g. new nodes, edges, chopped trees)
 func _on_graph_changed() -> void:
@@ -49,16 +67,28 @@ func _world_to_ui(p: Vector2) -> Vector2:
 	var scale := Vector2(rect_size.x / world_rect.size.x, rect_size.y / world_rect.size.y)
 	return (p - world_rect.position) * scale
 
+# Public helper so other nodes can convert world->ui
+func world_to_ui(p: Vector2) -> Vector2:
+	return _world_to_ui(p)
+
+# Public helper for vectors (no translation)
+func world_vec_to_ui(v: Vector2) -> Vector2:
+	var rect_size: Vector2 = get_size()
+	var sx : float = rect_size.x / max(world_rect.size.x, 1.0)
+	var sy : float = rect_size.y / max(world_rect.size.y, 1.0)
+	return Vector2(v.x * sx, v.y * sy)
+
 # ----------------------------------------------------------
 # DRAWING
 # ----------------------------------------------------------
 func _process(delta: float) -> void:
-	# Toggle logic; comment out if you want it always on
+	#Toggle logic; comment out if you want it always on
 	if InputMap.has_action("show_map"):
 		canvas.visible = Input.is_action_pressed("show_map")
 	# Animate curves (wobble): redraw when visible
 	if visible:
 		queue_redraw()
+	pass
 
 func _draw() -> void:
 	if graph == null:
@@ -114,3 +144,22 @@ func _draw_root_curve(a: Vector2, b: Vector2) -> void:
 func _bezier2(p0: Vector2, p1: Vector2, p2: Vector2, t: float) -> Vector2:
 	var u: float = 1.0 - t
 	return u * u * p0 + 2.0 * u * t * p1 + t * t * p2
+	
+# --- Spawner-Signal-Handler: Token erzeugen ---
+func _on_minimap_spawn_requested(start_node: int, goal_node: int, speed_px_per_s: float) -> void:
+	if graph == null:
+		return
+	var path_ids: Array[int] = graph.shortest_path(start_node, goal_node)
+	if path_ids.size() < 2:
+		return
+	var tok := MinimapEnemyToken.new()
+	tok.path = path_ids
+	tok.seg = 0
+	tok.poly = graph.get_edge_polyline(path_ids[0], path_ids[1], 24)  # world-space Punkte
+	tok.poly_i = 0	
+	if tok.poly.size() > 0:
+		tok.pos_world = tok.poly[0]
+	
+	tok.speed_ui = speed_px_per_s
+	tok.born_t = Time.get_ticks_msec() * 0.001
+	tokens.append(tok)

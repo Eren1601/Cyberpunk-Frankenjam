@@ -209,7 +209,6 @@ func auto_connect_by_radius(min_r: float, max_r: float, seed: int = 12345, max_d
 						continue
 					var cost: float = (d if use_distance_cost else 1.0)
 					add_edge(a_id, b_id, cost)
-					print_debug("a_id: ", a_id , " b_id: ", b_id, " cost: ", cost)
-
+ 
 	# Emit once at end to avoid repeated redraws if you prefer. Here add_edge already emits.
 	emit_signal("graph_changed")

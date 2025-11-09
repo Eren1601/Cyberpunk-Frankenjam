@@ -13,7 +13,8 @@ func _ready() -> void:
 	graph = get_tree().get_root().find_child("RootGraph", true, false)
 	if graph == null:
 		push_warning("Tree.gd: RootGraph not found in scene.")
-	
+	if is_spawner:
+		add_to_group("enemy_spawners")
 
 func chop_down() -> void:
 	if chopped: return
