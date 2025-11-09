@@ -1,6 +1,8 @@
 extends Node2D
-
+@export var is_spawner: bool = false
 @export var _node_id: int = 0
+@export var is_big_tree: bool = false
+
 var node_id: int:
 	get: return _node_id
 	

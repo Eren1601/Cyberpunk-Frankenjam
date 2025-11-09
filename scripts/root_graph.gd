@@ -4,10 +4,17 @@
 class_name RootGraph
 extends Node
 
+@export_group("Automated Connection Parameters")
+@export var min_connect_radius := 200.0
+@export var max_connect_radius := 300.0
+
+
 class RootNode:
 	var id: int
 	var pos: Vector2
 	var enabled: bool = true
+	var is_spawner: bool = true
+	var is_big_tree: bool = false
 
 class RootEdge:
 	var a_id: int
@@ -21,10 +28,12 @@ var adj: Dictionary = {}              # id -> Array[[neighbor_id, cost]]
 signal graph_changed
 signal node_toggled(id: int, enabled: bool)
 
-func add_node(id: int, pos: Vector2) -> void:
+func add_node(id: int, pos: Vector2, is_spawner: bool = false, is_big_tree: bool = false) -> void:
 	var n := RootNode.new()
 	n.id = id
 	n.pos = pos
+	n.is_spawner = is_spawner
+	n.is_big_tree = is_big_tree
 	nodes[id] = n
 
 func add_edge(a_id: int, b_id: int, cost := 1.0) -> void:
@@ -54,6 +63,9 @@ func get_world_bounds() -> Rect2:
 	var x_values: Array[float] = []
 	var y_values: Array[float] = []
 	for n in nodes.values():
+		#if n.is_spawner:
+			#print("skipped spawner in bounds calculation")
+			#continue
 		x_values.append(n.pos.x)
 		y_values.append(n.pos.y)
 	x_values.sort()
@@ -134,14 +146,15 @@ func _ready() -> void:
 	# 2) Define edges manually here for now (edit this block per level)
 	var trees_root := get_tree().get_root().find_child("Trees", true, false)
 	if trees_root:
-		var id_counter := 1
 		for t in trees_root.get_children():
-			if t.has_method("get_node_id"):
-				var tid: int = 0
-				tid = int(t.call("get_node_id"))
-				add_node(tid, (t as Node2D).global_position)
-				id_counter = max(id_counter, tid + 1)
-		auto_connect_by_radius(100.0, 120.0, 12345, -1, true)
+			if "node_id" in t:
+				var tid: int = int(t.node_id)
+				add_node(tid, (t as Node2D).global_position, t.is_spawner, t.is_big_tree)
+			else:
+				printerr("Tree has no node_ID")
+		auto_connect_by_radius(min_connect_radius, max_connect_radius, 12345, -1, true)
+	else:
+		printerr("no Trees Node found")
 
 func _has_edge(a_id: int, b_id: int) -> bool:
 	for e in edges:
@@ -156,11 +169,19 @@ func _degree_of(nid: int) -> int:
 			d += 1
 	return d
 
+func get_spawn_nodes() -> Array[int]:
+	var out: Array[int] = []
+	for id in nodes.keys():
+		if nodes[id].enabled and nodes[id].is_spawner:
+			out.append(id)
+	return out
+
 func auto_connect_by_radius(min_r: float, max_r: float, seed: int = 12345, max_degree: int = -1, use_distance_cost: bool = true) -> void:
 	# For each node, pick a random connection radius in [min_r, max_r].
 	# Then connect all node pairs whose distance <= min(r_i, r_j),
 	# respecting optional max_degree per node. Edge cost = distance or 1.0.
 	if nodes.size() < 2:
+		printerr("less than 2 Nodes")
 		return
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
@@ -188,6 +209,7 @@ func auto_connect_by_radius(min_r: float, max_r: float, seed: int = 12345, max_d
 						continue
 					var cost: float = (d if use_distance_cost else 1.0)
 					add_edge(a_id, b_id, cost)
+					print_debug("a_id: ", a_id , " b_id: ", b_id, " cost: ", cost)
 
 	# Emit once at end to avoid repeated redraws if you prefer. Here add_edge already emits.
 	emit_signal("graph_changed")
