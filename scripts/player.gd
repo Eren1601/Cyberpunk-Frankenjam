@@ -8,16 +8,13 @@ extends CharacterBody2D
 
 @export var Can: PackedScene = preload("res://scenes/watering_can.tscn")
 @onready var can_cd : Timer = $can_cd
-@onready var axe_cd : Timer = $axe_cd
-@onready var axe_hitbox: Area2D = $AxeHitbox
 
 var is_hacking: bool = false  # Status, ob der Spieler gerade hackt
 
 func _ready() -> void:
 	anim.play("idle")
 	anim.animation_finished.connect(_on_anim_finished)
-	axe_hitbox.monitoring = false
-	axe_hitbox.body_entered.connect(_on_axe_hitbox_body_entered)
+
 	
 
 func _physics_process(delta: float) -> void:
@@ -79,7 +76,6 @@ func _start_hack():
 	is_hacking = true
 	anim.play("Hack")
 	velocity = Vector2.ZERO
-	axe_hitbox.monitoring = true  # Hitbox aktivieren
  # beim Hacken stehen bleiben
 
 func _on_anim_finished():
@@ -98,13 +94,5 @@ func _place_watering_can():
 	var can = Can.instantiate()
 	can.position = position
 	can.z_index = self.z_index
-	get_tree().current_scene.add_child(can)#
+	get_tree().current_scene.add_child(can)
 	
-func _on_axe_hitbox_body_entered(body: Node) -> void:
-	if body.has_method("chop_down"):
-		body.chop_down()
-		
-
-
-func _on_axe_hitbox_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	pass # Replace with function body.

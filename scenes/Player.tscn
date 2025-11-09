@@ -262,3 +262,9 @@ position = Vector2(0, 7)
 shape = SubResource("CapsuleShape2D_3li8b")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="can_cd" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="mushroom_time" type="Timer" parent="."]
+wait_time = 3.0
