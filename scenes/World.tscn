@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://46efp3lmwcbh"]
+[gd_scene load_steps=30 format=3 uid="uid://46efp3lmwcbh"]
 
 [ext_resource type="PackedScene" uid="uid://c5k7efi2kjktv" path="res://scenes/Tree.tscn" id="1_hlk0d"]
 [ext_resource type="PackedScene" uid="uid://cc025nun0pfn2" path="res://scenes/Player.tscn" id="2_0uv0p"]
@@ -6,6 +6,25 @@
 [ext_resource type="Script" uid="uid://kbdndscucxg5" path="res://scripts/enemy_spawner.gd" id="4_ygioq"]
 [ext_resource type="Script" uid="uid://6n4t5wt7pvdf" path="res://scripts/root_overlay.gd" id="5_pdh0q"]
 [ext_resource type="Script" uid="uid://v8mr16i7s03o" path="res://scripts/game_state.gd" id="6_h1bdy"]
+[ext_resource type="Texture2D" uid="uid://cg0yl5kmhv0bq" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet1.png" id="7_yncth"]
+[ext_resource type="Texture2D" uid="uid://dktrn2c3vwgym" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet2.png" id="8_jgbtq"]
+[ext_resource type="Texture2D" uid="uid://b0sbh3apd1mc" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet11.png" id="9_4q8dg"]
+[ext_resource type="Texture2D" uid="uid://bq7yiqjqb1dqj" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet12.png" id="10_lawxi"]
+[ext_resource type="Texture2D" uid="uid://bp5qthm1pbk0e" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet13.png" id="11_uni40"]
+[ext_resource type="Texture2D" uid="uid://mo5e83ee0vfc" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet14.png" id="12_aqlsr"]
+[ext_resource type="Texture2D" uid="uid://bsi8082knie4j" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet15.png" id="13_n2fr6"]
+[ext_resource type="Texture2D" uid="uid://bii54ydpxxy5j" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet16.png" id="14_128ka"]
+[ext_resource type="Texture2D" uid="uid://dr21ni8x330fn" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet17.png" id="15_ngql4"]
+[ext_resource type="Texture2D" uid="uid://cv5pdam86xhd4" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet18.png" id="16_b64vv"]
+[ext_resource type="Texture2D" uid="uid://bgn8tkk2ckqje" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet3.png" id="17_agajo"]
+[ext_resource type="Texture2D" uid="uid://bgf1pnatbsi04" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet4.png" id="18_2pad8"]
+[ext_resource type="Texture2D" uid="uid://lgf2b3hy6gln" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet5.png" id="19_e4yt5"]
+[ext_resource type="Texture2D" uid="uid://cxj5osh4xlo7e" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet6.png" id="20_x70b3"]
+[ext_resource type="Texture2D" uid="uid://ctsiosi1hwf03" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet7.png" id="21_5w2bu"]
+[ext_resource type="Texture2D" uid="uid://b48anqtljxbpt" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet8.png" id="22_1bdwf"]
+[ext_resource type="Texture2D" uid="uid://c7650qvnn1frr" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet9.png" id="23_1w2qq"]
+[ext_resource type="Texture2D" uid="uid://cbg083ec5y6y5" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet10.png" id="24_yd118"]
+[ext_resource type="PackedScene" uid="uid://do1qmq2ecoab3" path="res://scenes/Ryggsdial.tscn" id="25_jgbtq"]
 
 [sub_resource type="Gradient" id="Gradient_7c4bj"]
 offsets = PackedFloat32Array(0, 0.25666666, 0.89666665)
@@ -19,23 +38,78 @@ height = 720
 noise = SubResource("FastNoiseLite_nrtoj")
 color_ramp = SubResource("Gradient_7c4bj")
 
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_lffjk"]
+frames = 18
+speed_scale = 22.7
+frame_0/texture = ExtResource("7_yncth")
+frame_0/duration = 33.0
+frame_1/texture = ExtResource("8_jgbtq")
+frame_1/duration = 33.0
+frame_2/texture = ExtResource("17_agajo")
+frame_2/duration = 33.0
+frame_3/texture = ExtResource("18_2pad8")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("19_e4yt5")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("20_x70b3")
+frame_5/duration = 1.0
+frame_6/texture = ExtResource("21_5w2bu")
+frame_6/duration = 1.0
+frame_7/texture = ExtResource("22_1bdwf")
+frame_7/duration = 1.0
+frame_8/texture = ExtResource("23_1w2qq")
+frame_8/duration = 1.0
+frame_9/texture = ExtResource("24_yd118")
+frame_9/duration = 1.0
+frame_10/texture = ExtResource("9_4q8dg")
+frame_10/duration = 1.0
+frame_11/texture = ExtResource("10_lawxi")
+frame_11/duration = 1.0
+frame_12/texture = ExtResource("11_uni40")
+frame_12/duration = 1.0
+frame_13/texture = ExtResource("12_aqlsr")
+frame_13/duration = 1.0
+frame_14/texture = ExtResource("13_n2fr6")
+frame_14/duration = 1.0
+frame_15/texture = ExtResource("14_128ka")
+frame_15/duration = 1.0
+frame_16/texture = ExtResource("15_ngql4")
+frame_16/duration = 1.0
+frame_17/texture = ExtResource("16_b64vv")
+frame_17/duration = 1.0
+
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
 
 [node name="Forest Layer" type="Node2D" parent="."]
 
 [node name="Background" type="Sprite2D" parent="Forest Layer"]
+position = Vector2(-2.0000114, -22.000029)
+scale = Vector2(1.3958333, 1.35)
 texture = SubResource("NoiseTexture2D_i4b1j")
-metadata/_edit_lock_ = true
 
-[node name="Player" parent="Forest Layer/Background" instance=ExtResource("2_0uv0p")]
+[node name="Player" parent="Forest Layer" instance=ExtResource("2_0uv0p")]
 position = Vector2(-303, -136)
 
 [node name="Trees" type="Node2D" parent="Forest Layer"]
 
 [node name="Tree" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
-position = Vector2(-399, -247)
+position = Vector2(-416, -237)
 _node_id = 1
+
+[node name="Tree65" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-537, -235)
+is_spawner = true
+_node_id = 65
+
+[node name="Tree64" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-456, -320)
+_node_id = 64
+
+[node name="Tree110" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-523, -368)
+is_spawner = true
+_node_id = 110
 
 [node name="Tree2" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(-333, -220)
@@ -45,16 +119,44 @@ _node_id = 2
 position = Vector2(-396, -142)
 _node_id = 3
 
+[node name="Tree66" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-525, -112)
+is_spawner = true
+_node_id = 66
+
 [node name="Tree4" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(182, -213)
 _node_id = 4
+
+[node name="Tree102" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(154, -290)
+_node_id = 4
+
+[node name="Tree108" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(156, -377)
+is_spawner = true
+_node_id = 108
+
+[node name="Tree105" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-206, -370)
+is_spawner = true
+_node_id = 105
 
 [node name="Tree57" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(86, -230)
 _node_id = 57
 
+[node name="Tree101" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(47, -296)
+_node_id = 57
+
+[node name="Tree107" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(57, -369)
+is_spawner = true
+_node_id = 107
+
 [node name="Tree55" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
-position = Vector2(-72, -21)
+position = Vector2(-73, 3)
 _node_id = 55
 
 [node name="Tree5" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
@@ -82,27 +184,70 @@ position = Vector2(-10, -250)
 _node_id = 56
 
 [node name="Tree8" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
-position = Vector2(100, -127)
+position = Vector2(100, -93)
 _node_id = 8
 
 [node name="Tree39" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(385, -143)
 _node_id = 39
 
+[node name="Tree97" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(502, -214)
+is_spawner = true
+_node_id = 97
+
 [node name="Tree40" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(426, -248)
 _node_id = 40
+
+[node name="Tree100" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(477, -390)
+is_spawner = true
+_node_id = 100
+
+[node name="Tree98" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(524, -293)
+is_spawner = true
+_node_id = 98
 
 [node name="Tree41" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(341, -267)
 _node_id = 41
 
+[node name="Tree99" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(349, -380)
+is_spawner = true
+_node_id = 99
+
 [node name="Tree42" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(276, -246)
 _node_id = 42
 
+[node name="Tree103" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(231, -303)
+_node_id = 42
+
+[node name="Tree109" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(273, -378)
+is_spawner = true
+_node_id = 109
+
 [node name="Tree58" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(408, -35)
+_node_id = 58
+
+[node name="Tree96" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(501, -130)
+is_spawner = true
+_node_id = 96
+
+[node name="Tree93" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(516, -31)
+is_spawner = true
+_node_id = 93
+
+[node name="Tree92" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(405, 37)
 _node_id = 58
 
 [node name="Tree59" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
@@ -110,7 +255,7 @@ position = Vector2(323, -54)
 _node_id = 59
 
 [node name="Tree60" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
-position = Vector2(258, -33)
+position = Vector2(241, -22)
 _node_id = 60
 
 [node name="Tree43" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
@@ -126,42 +271,64 @@ position = Vector2(-72, 207)
 _node_id = 45
 
 [node name="Tree46" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
-position = Vector2(-69, 312)
+position = Vector2(285, -133)
 _node_id = 46
 
+[node name="Tree78" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-14, 346)
+_node_id = 78
+
+[node name="Tree77" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-125, 343)
+_node_id = 77
+
 [node name="Tree47" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
-position = Vector2(-154, 293)
+position = Vector2(-140, 267)
 _node_id = 47
 
 [node name="Tree48" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(82, 197)
 _node_id = 48
 
-[node name="Tree54" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
-z_index = 2
-position = Vector2(-6, 46.00001)
-scale = Vector2(3.5, 3.5)
-_node_id = 54
-
 [node name="Tree49" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(85, 302)
 _node_id = 49
 
+[node name="Tree80" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-64, 415)
+is_spawner = true
+_node_id = 80
+
 [node name="Tree50" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
-position = Vector2(0, 283)
+position = Vector2(7, 256)
 _node_id = 50
 
+[node name="Tree79" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(59, 419)
+is_spawner = true
+_node_id = 79
+
 [node name="Tree51" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
-position = Vector2(-247, 233)
+position = Vector2(-268, 242)
 _node_id = 51
 
 [node name="Tree52" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(-244, 338)
 _node_id = 52
 
+[node name="Tree76" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-189, 397)
+is_spawner = true
+_node_id = 76
+
 [node name="Tree53" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(-329, 319)
 _node_id = 53
+
+[node name="Tree74" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-326, 395)
+is_spawner = true
+_node_id = 74
 
 [node name="Tree9" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(85, -9)
@@ -172,7 +339,7 @@ position = Vector2(-145, -205)
 _node_id = 10
 
 [node name="Tree11" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
-position = Vector2(-79, -178)
+position = Vector2(-29, -125)
 _node_id = 11
 
 [node name="Tree12" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
@@ -183,9 +350,23 @@ _node_id = 12
 position = Vector2(-271, -281)
 _node_id = 13
 
+[node name="Tree104" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-347, -383)
+is_spawner = true
+_node_id = 104
+
 [node name="Tree14" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(-205, -254)
 _node_id = 14
+
+[node name="Tree63" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-102, -306)
+_node_id = 14
+
+[node name="Tree106" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-57, -383)
+is_spawner = true
+_node_id = 106
 
 [node name="Tree15" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(-268, -176)
@@ -195,6 +376,11 @@ _node_id = 15
 position = Vector2(-420, -50)
 _node_id = 16
 
+[node name="Tree67" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-519, 10)
+is_spawner = true
+_node_id = 67
+
 [node name="Tree17" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(-354, -23)
 _node_id = 17
@@ -203,8 +389,13 @@ _node_id = 17
 position = Vector2(-417, 55)
 _node_id = 18
 
+[node name="Tree68" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-543, 78)
+is_spawner = true
+_node_id = 68
+
 [node name="Tree19" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
-position = Vector2(-337, 135)
+position = Vector2(-337, 110)
 _node_id = 19
 
 [node name="Tree20" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
@@ -212,7 +403,7 @@ position = Vector2(-271, 162)
 _node_id = 20
 
 [node name="Tree21" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
-position = Vector2(-334, 240)
+position = Vector2(-204, -127)
 _node_id = 12
 
 [node name="Tree22" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
@@ -235,6 +426,16 @@ _node_id = 25
 position = Vector2(442, 120)
 _node_id = 31
 
+[node name="Tree95" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(507, 185)
+is_spawner = true
+_node_id = 95
+
+[node name="Tree94" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(514, 90)
+is_spawner = true
+_node_id = 94
+
 [node name="Tree32" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(-38, 127)
 _node_id = 32
@@ -247,17 +448,66 @@ _node_id = 33
 position = Vector2(167, 275)
 _node_id = 34
 
+[node name="Tree81" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(214, 332)
+_node_id = 81
+
+[node name="Tree83" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(168, 403)
+is_spawner = true
+_node_id = 83
+
 [node name="Tree35" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(324, 169)
+_node_id = 35
+
+[node name="Tree91" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(335, 63)
 _node_id = 35
 
 [node name="Tree36" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(390, 196)
 _node_id = 36
 
+[node name="Tree87" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(440, 261)
+_node_id = 87
+
+[node name="Tree89" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(520, 282)
+is_spawner = true
+_node_id = 89
+
+[node name="Tree88" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(456, 405)
+is_spawner = true
+_node_id = 88
+
 [node name="Tree37" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(327, 274)
 _node_id = 37
+
+[node name="Tree90" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(86, 89)
+_node_id = 90
+
+[node name="Tree86" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(346, 414)
+is_spawner = true
+_node_id = 86
+
+[node name="Tree85" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(259, 272)
+_node_id = 37
+
+[node name="Tree84" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(263, 404)
+is_spawner = true
+_node_id = 84
+
+[node name="Tree82" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-348, -299)
+_node_id = 82
 
 [node name="Tree38" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(396, 322)
@@ -272,8 +522,18 @@ position = Vector2(-185, 207)
 _node_id = 27
 
 [node name="Tree28" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
-position = Vector2(-432, 178)
+position = Vector2(-433, 162)
 _node_id = 28
+
+[node name="Tree70" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-503, 221)
+is_spawner = true
+_node_id = 70
+
+[node name="Tree69" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-511, 145)
+is_spawner = true
+_node_id = 69
 
 [node name="Tree29" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
 position = Vector2(-366, 205)
@@ -283,19 +543,35 @@ _node_id = 29
 position = Vector2(-429, 283)
 _node_id = 30
 
+[node name="Tree75" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-492, 401)
+is_spawner = true
+_node_id = 75
+
+[node name="Tree73" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-397, 413)
+is_spawner = true
+_node_id = 73
+
+[node name="Tree72" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(-463, 342)
+_node_id = 72
+
+[node name="Tree71" parent="Forest Layer/Trees" instance=ExtResource("1_hlk0d")]
+position = Vector2(518, 356)
+is_spawner = true
+_node_id = 71
+
+[node name="Tree54" parent="Forest Layer/Trees" instance=ExtResource("25_jgbtq")]
+position = Vector2(-1, 5)
+
 [node name="RootGraph" type="Node" parent="."]
 script = ExtResource("3_b3faq")
+min_connect_radius = 125.0
+max_connect_radius = 175.0
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("4_ygioq")
-
-[node name="RootOverlay" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("5_pdh0q")
-graph_path = NodePath("../RootGraph")
 
 [node name="GameState" type="Node" parent="."]
 script = ExtResource("6_h1bdy")
@@ -308,3 +584,30 @@ collision_mask = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/StaticBody2D"]
 polygon = PackedVector2Array(-479, -359, 481, -357, 479, 359, -485, 357, -480, -339, -533, -118, -559, 328, -474, 468, 162, 465, 629, 460, 591, -301, 434, -431, -26, -469, -553, -412, -481, -340)
+metadata/_edit_lock_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="OverlayBG" type="TextureRect" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = SubResource("AnimatedTexture_lffjk")
+
+[node name="RootOverlay" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("canvas")]
+layout_mode = 3
+anchor_left = 0.14375
+anchor_top = 0.16016668
+anchor_right = 0.87250006
+anchor_bottom = 0.7110001
+offset_left = -6.0
+offset_top = -6.4400024
+offset_right = 2.7999878
+offset_bottom = 3.3599854
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_pdh0q")
+canvas = NodePath("..")
+graph_path = NodePath("../RootGraph")
+metadata/_edit_use_anchors_ = true

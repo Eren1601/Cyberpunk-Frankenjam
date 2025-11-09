@@ -175,6 +175,13 @@ func get_spawn_nodes() -> Array[int]:
 		if nodes[id].enabled and nodes[id].is_spawner:
 			out.append(id)
 	return out
+	
+func set_active_spawn_nodes(active_node_ids: Array[int] ):
+	for n in nodes:
+		# wenn id von n die id von einem der array Einträge matcht, dann setze enabled auf true
+		# setze alle anderen spawner nodes auf enabeled = false
+		# redrawe, damit die farben der Kreise geupdated werden
+		pass
 
 func auto_connect_by_radius(min_r: float, max_r: float, seed: int = 12345, max_degree: int = -1, use_distance_cost: bool = true) -> void:
 	# For each node, pick a random connection radius in [min_r, max_r].
@@ -209,7 +216,40 @@ func auto_connect_by_radius(min_r: float, max_r: float, seed: int = 12345, max_d
 						continue
 					var cost: float = (d if use_distance_cost else 1.0)
 					add_edge(a_id, b_id, cost)
-					print_debug("a_id: ", a_id , " b_id: ", b_id, " cost: ", cost)
-
+ 
 	# Emit once at end to avoid repeated redraws if you prefer. Here add_edge already emits.
 	emit_signal("graph_changed")
+
+# Liefert eine gesampelte Bezier-Kurve zwischen zwei Nodes im Welt-Raum.
+# Wird u. a. von RootOverlay für das Zeichnen und Gegnerbewegung genutzt.
+func get_edge_polyline(a_id: int, b_id: int, steps: int = 24) -> PackedVector2Array:
+	var result := PackedVector2Array()
+
+	# Sicherstellen, dass beide Nodes existieren
+	if !nodes.has(a_id) or !nodes.has(b_id):
+		return result
+
+	var pa: Vector2 = nodes[a_id].pos
+	var pb: Vector2 = nodes[b_id].pos
+
+	# Mitte und optionale Krümmung
+	var mid: Vector2 = (pa + pb) * 0.5
+	var ctrl_offset: Vector2 = Vector2.ZERO
+
+	# Prüfen, ob Edge-Infos (ctrl_offset etc.) existieren
+	for e in edges:
+		if (e.a_id == a_id and e.b_id == b_id) or (e.a_id == b_id and e.b_id == a_id):
+			if "ctrl_offset" in e:
+				ctrl_offset = e.ctrl_offset
+			break
+
+	var p1: Vector2 = mid + ctrl_offset
+
+	# Punkte entlang der quadratischen Bezier-Kurve generieren
+	for i in range(steps + 1):
+		var t: float = float(i) / float(steps)
+		var u: float = 1.0 - t
+		var p: Vector2 = (u * u) * pa + (2.0 * u * t) * p1 + (t * t) * pb
+		result.append(p)
+
+	return result
