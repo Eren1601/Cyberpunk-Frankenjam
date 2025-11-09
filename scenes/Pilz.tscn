@@ -47,8 +47,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7kbj"]
-radius = 7.0
-height = 14.0
+radius = 11.0
+height = 22.0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_n7kbj")
@@ -57,7 +57,7 @@ script = ExtResource("1_n7kbj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gnxu8")
-frame_progress = 0.82348067
+frame_progress = 0.7173293
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_n7kbj")
