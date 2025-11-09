@@ -61,7 +61,7 @@ script = ExtResource("1_3gvst")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ly5gv")
-frame_progress = 0.42452937
+frame_progress = 0.18682083
 
 [node name="Area2D" type="Area2D" parent="."]
 

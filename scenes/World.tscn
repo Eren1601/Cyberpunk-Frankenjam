@@ -1,11 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://46efp3lmwcbh"]
+[gd_scene load_steps=30 format=3 uid="uid://46efp3lmwcbh"]
 
 [ext_resource type="PackedScene" uid="uid://c5k7efi2kjktv" path="res://scenes/Tree.tscn" id="1_hlk0d"]
 [ext_resource type="PackedScene" uid="uid://cc025nun0pfn2" path="res://scenes/Player.tscn" id="2_0uv0p"]
 [ext_resource type="Script" uid="uid://t8256dgfabob" path="res://scripts/root_graph.gd" id="3_b3faq"]
 [ext_resource type="Script" uid="uid://kbdndscucxg5" path="res://scripts/enemy_spawner.gd" id="4_ygioq"]
 [ext_resource type="Script" uid="uid://6n4t5wt7pvdf" path="res://scripts/root_overlay.gd" id="5_pdh0q"]
-[ext_resource type="PackedScene" uid="uid://6rv7soijyj8l" path="res://scenes/Enemy.tscn" id="6_4q8dg"]
 [ext_resource type="Script" uid="uid://v8mr16i7s03o" path="res://scripts/game_state.gd" id="6_h1bdy"]
 [ext_resource type="Texture2D" uid="uid://cg0yl5kmhv0bq" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet1.png" id="7_yncth"]
 [ext_resource type="Texture2D" uid="uid://dktrn2c3vwgym" path="res://aseprite/Sprites/Overlay/glitch_screen-Sheet2.png" id="8_jgbtq"]
@@ -574,7 +573,6 @@ max_connect_radius = 175.0
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("4_ygioq")
-enemy_scene = ExtResource("6_4q8dg")
 
 [node name="GameState" type="Node" parent="."]
 script = ExtResource("6_h1bdy")
@@ -615,3 +613,6 @@ graph_path = NodePath("../RootGraph")
 metadata/_edit_use_anchors_ = true
 
 [node name="EnemyLayer" type="Node2D" parent="CanvasLayer"]
+
+[connection signal="graph_changed" from="RootGraph" to="CanvasLayer/RootOverlay" method="_on_root_graph_changed"]
+[connection signal="minimap_spawn_requested" from="EnemySpawner" to="CanvasLayer/RootOverlay" method="_on_enemy_spawner_minimap_spawn_requested"]

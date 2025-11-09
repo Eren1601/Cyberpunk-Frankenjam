@@ -108,6 +108,8 @@ func select_locations_for_next_wave() -> Array[int]:
 	if candidates.size() > k:
 		candidates.resize(k)
 	print_debug(candidates)
+	#TODO Spawner auf enabled setzen
+		
 	return candidates
 
 func _spawn_one_from_selection() -> void:
