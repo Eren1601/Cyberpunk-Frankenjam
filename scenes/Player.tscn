@@ -1,10 +1,35 @@
-[gd_scene load_steps=38 format=3 uid="uid://cc025nun0pfn2"]
+[gd_scene load_steps=45 format=3 uid="uid://cc025nun0pfn2"]
 
 [ext_resource type="Script" uid="uid://chxnsoyu2lb2w" path="res://scripts/player.gd" id="1_p0vlq"]
+[ext_resource type="Texture2D" uid="uid://cu4bnrwhg6qq8" path="res://aseprite/Animation_Robert_Axt.png" id="2_70d11"]
 [ext_resource type="Texture2D" uid="uid://bhf2mqfs0trn8" path="res://aseprite/Animation_Rober_Idle..png" id="2_qu4a1"]
 [ext_resource type="Texture2D" uid="uid://itj13bqkny7l" path="res://aseprite/Animation_Rober_PickUp..png" id="3_70d11"]
 [ext_resource type="Texture2D" uid="uid://bdf0f2rn0kuw1" path="res://aseprite/Animation_Rober_InstallChip.png" id="4_cw2d6"]
 [ext_resource type="Texture2D" uid="uid://bkgthtbbfe0wn" path="res://aseprite/Animation_Rober_walkt.png" id="5_khinc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cw2d6"]
+atlas = ExtResource("2_70d11")
+region = Rect2(0, 0, 101, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khinc"]
+atlas = ExtResource("2_70d11")
+region = Rect2(101, 0, 101, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fq1a3"]
+atlas = ExtResource("2_70d11")
+region = Rect2(202, 0, 101, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu4mg"]
+atlas = ExtResource("2_70d11")
+region = Rect2(303, 0, 101, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tk6la"]
+atlas = ExtResource("2_70d11")
+region = Rect2(404, 0, 101, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrxk4"]
+atlas = ExtResource("2_70d11")
+region = Rect2(505, 0, 101, 67)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_srp4u"]
 atlas = ExtResource("3_70d11")
@@ -130,6 +155,29 @@ region = Rect2(505, 0, 101, 67)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_cw2d6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khinc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fq1a3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu4mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tk6la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yrxk4")
+}],
+"loop": true,
+"name": &"Hack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_srp4u")
 }, {
 "duration": 1.0,
@@ -253,12 +301,12 @@ script = ExtResource("1_p0vlq")
 y_sort_enabled = true
 position = Vector2(2.5, 0)
 sprite_frames = SubResource("SpriteFrames_fq1a3")
-animation = &"idle"
-frame_progress = 0.42452335
+animation = &"Hack"
+frame_progress = 0.014375104
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
-position = Vector2(0, 7)
+position = Vector2(0, 6)
 shape = SubResource("CapsuleShape2D_3li8b")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -268,5 +316,9 @@ wait_time = 5.0
 one_shot = true
 
 [node name="can_cd" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="axe_cd" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
