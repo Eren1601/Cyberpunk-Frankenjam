@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
-@export var speed: float = 200.0
+@export var speed: float = 300.0
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @export var Pilz: PackedScene = preload("res://scenes/Pilz.tscn")
 @onready var mushroom_time: Timer = $mushroom_time
-
+@export var Can: PackedScene = preload("res://scenes/watering_can.tscn")
+@onready var can_cd : Timer =$can_cd
 
 func _ready() -> void:
 	anim.play("idle")
@@ -37,9 +38,21 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("plant_mushroom") and mushroom_time.time_left ==0:
 		_place_mushroom()
 		mushroom_time.start()
-
+		
+	if Input.is_action_just_pressed("use_watering_can") and can_cd.time_left ==0:
+		_place_watering_can()
+		can_cd.start()
+		
 func _place_mushroom():
 	var mushroom = Pilz.instantiate()
 	mushroom.position = position
 	mushroom.z_index = self.z_index
 	get_tree().current_scene.add_child(mushroom)
+	
+
+func _place_watering_can():
+	var can = Can.instantiate()
+	can.position = position
+	can.z_index = self.z_index
+	get_tree().current_scene.add_child(can)
+	

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjv2cdvpxksp"]
+
+[ext_resource type="Texture2D" uid="uid://dtjggfmsdofyn" path="res://aseprite/Gießkanne.png" id="1_a15la"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7kbj"]
+radius = 7.0
+height = 14.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="AnimatedSprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_a15la")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_n7kbj")

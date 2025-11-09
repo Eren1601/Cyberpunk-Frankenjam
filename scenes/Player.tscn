@@ -266,3 +266,7 @@ shape = SubResource("CapsuleShape2D_3li8b")
 [node name="mushroom_time" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="can_cd" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true

@@ -43,3 +43,4 @@ text = "Quit"
 
 [node name="?" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+text = "?"
