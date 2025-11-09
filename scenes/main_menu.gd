@@ -10,7 +10,7 @@ func _ready() -> void:
 	
 
 func _on_play_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/World.tscn")
+	get_tree().change_scene_to_file("res://scenes/cutscene_start.tscn")
 
 func _on_suprised_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/job.tscn")

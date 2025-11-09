@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4ehtdc0b6x0o"]
+[gd_scene load_steps=3 format=3 uid="uid://w4ldae1pj55c"]
 
-[ext_resource type="Script" uid="uid://dbeafb2y5bsnr" path="res://scenes/main_menu.gd" id="1_yqorp"]
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_yqorp"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ukcvp"]
 
